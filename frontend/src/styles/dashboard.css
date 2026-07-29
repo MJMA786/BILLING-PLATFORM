@@ -1,0 +1,447 @@
+/* ==========================================
+   DASHBOARD HEADER
+========================================== */
+
+.dashboard-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.dashboard-tag{
+
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:50px;
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+    font-size:.85rem;
+
+    font-weight:600;
+
+    margin-bottom:15px;
+
+}
+
+.dashboard-header h1{
+
+    font-size:2.4rem;
+
+    font-weight:700;
+
+    color:#0f172a;
+
+    margin-bottom:8px;
+
+}
+
+.dashboard-header p{
+
+    color:#64748b;
+
+    font-size:1rem;
+
+    margin:0;
+
+}
+
+.dashboard-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    flex-wrap:wrap;
+
+}
+
+.dashboard-date{
+
+    background:white;
+
+    padding:12px 18px;
+
+    border-radius:14px;
+
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+
+    font-weight:600;
+
+    color:#334155;
+
+}
+
+.dashboard-actions .btn{
+
+    border-radius:14px;
+
+    padding:12px 20px;
+
+    font-weight:600;
+
+    box-shadow:0 10px 25px rgba(37,99,235,.25);
+
+    transition:.3s;
+
+}
+
+.dashboard-actions .btn:hover{
+
+    transform:translateY(-3px);
+
+}
+/* ==========================================
+   STAT CARD
+========================================== */
+
+.stat-card{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:24px;
+
+    box-shadow:0 15px 35px rgba(15,23,42,.06);
+
+    transition:all .35s ease;
+
+    height:100%;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.stat-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:5px;
+
+    height:100%;
+
+    background:#2563eb;
+
+    transition:.3s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 45px rgba(37,99,235,.18);
+
+}
+
+.stat-card:hover::before{
+
+    width:8px;
+
+}
+
+.stat-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.stat-icon{
+
+    width:64px;
+
+    height:64px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:white;
+
+    font-size:1.6rem;
+
+    transition:.35s;
+
+}
+
+.stat-card:hover .stat-icon{
+
+    transform:scale(1.08) rotate(-5deg);
+
+}
+
+/* Colors */
+
+.stat-icon.primary{
+
+    background:linear-gradient(135deg,#2563eb,#60a5fa);
+
+}
+
+.stat-icon.success{
+
+    background:linear-gradient(135deg,#10b981,#34d399);
+
+}
+
+.stat-icon.warning{
+
+    background:linear-gradient(135deg,#f59e0b,#fbbf24);
+
+}
+
+.stat-icon.danger{
+
+    background:linear-gradient(135deg,#ef4444,#f87171);
+
+}
+
+.stat-change{
+
+    background:#ecfdf5;
+
+    color:#10b981;
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    font-size:.85rem;
+
+    font-weight:700;
+
+}
+
+.stat-content h6{
+
+    color:#64748b;
+
+    margin-bottom:10px;
+
+    font-weight:600;
+
+}
+
+.stat-content h2{
+
+    font-size:2.3rem;
+
+    font-weight:700;
+
+    color:#0f172a;
+
+    margin-bottom:8px;
+
+}
+
+.stat-content small{
+
+    color:#94a3b8;
+
+    font-size:.9rem;
+
+}
+/* ==========================================
+   DASHBOARD WIDGET
+========================================== */
+.dashboard-widget{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    box-shadow:0 15px 35px rgba(15,23,42,.06);
+
+    transition:.35s;
+
+    border:1px solid transparent;
+
+}
+
+.dashboard-widget:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#dbeafe;
+
+    box-shadow:0 20px 45px rgba(37,99,235,.12);
+
+}
+/* ===========================
+   INVOICES
+=========================== */
+
+.invoice-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 0;
+
+    border-bottom:1px solid #eef2f7;
+
+}
+
+.invoice-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.invoice-item h6{
+
+    margin:0;
+
+    font-weight:600;
+
+}
+
+.invoice-item small{
+
+    color:#64748b;
+
+}
+
+/* ===========================
+   ACTIVITY
+=========================== */
+
+.activity-item{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-bottom:22px;
+
+}
+
+.activity-dot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    margin-top:8px;
+
+}
+
+.activity-item p{
+
+    margin:4px 0 0;
+
+    color:#64748b;
+
+    font-size:.92rem;
+
+}
+
+/* ===========================
+   EMPTY STATE
+=========================== */
+
+.empty-state{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    color:#94a3b8;
+
+}
+
+.empty-state i{
+
+    font-size:2.5rem;
+
+    margin-bottom:15px;
+
+}
+/* ==========================================
+   DASHBOARD PAGE
+========================================== */
+
+.dashboard-page{
+
+    min-height:100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8fafc 0%,
+            #eef4ff 100%
+        );
+
+    padding:30px;
+
+}
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#cbd5e1;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#94a3b8;
+
+}
+.badge{
+
+    padding:8px 12px;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+}

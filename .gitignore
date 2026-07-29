@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Environment Variables
+.env.*
+.env.local
+.env
+
+# Database
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# Alembic
+alembic/versions/__pycache__/
+
+# VS Code
+.vscode/
+
+# Python cache
+.cache/
+
+# Node.js
+frontend/node_modules/
+
+# React build
+frontend/dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Coverage
+.coverage
+htmlcov/

@@ -1,0 +1,33 @@
+body {
+    background-color: #f5f7fb;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.nav-link {
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: #495057;
+    color: white !important;
+    transform: translateX(5px);
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    transition: .3s;
+}
+
+.table {
+    background: white;
+}
+
+.dropdown-toggle::after {
+    margin-left: .5rem;
+}
