@@ -2,98 +2,181 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
-  const navigate = useNavigate();
 
-  const { user, logout } = useAuth();
+    const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login", { replace: true });
-  };
+    const { user, logout } = useAuth();
 
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
-      <div className="container-fluid">
+    const handleLogout = () => {
 
-        <h4 className="mb-0 fw-bold">
-          Subscription Management Platform
-        </h4>
+        logout();
 
-        <div className="d-flex align-items-center">
+        navigate("/login", { replace: true });
 
-          <button
-            type="button"
-            className="btn btn-link text-dark me-3 p-0"
-          >
-            <i className="bi bi-bell fs-5"></i>
-          </button>
+    };
 
-          <div className="dropdown">
+    return (
 
-            <button
-              className="btn btn-light dropdown-toggle"
-              data-bs-toggle="dropdown"
-            >
-              <i className="bi bi-person-circle me-2"></i>
+        <header className="top-navbar">
 
-              {user?.name || "User"}
-            </button>
+            <div className="navbar-left">
 
-            <ul className="dropdown-menu dropdown-menu-end">
+                <h4 className="page-title">
 
-              <li>
-                <h6 className="dropdown-header">
-                  {user?.email}
-                </h6>
-              </li>
+                    Billing Platform
 
-              <li>
-                <span className="dropdown-item-text text-muted">
-                 {user?.role}
-                </span>
-              </li>
+                </h4>
 
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
+                <div className="search-box">
 
-              <li>
-                <button className="dropdown-item">
-                  <i className="bi bi-person me-2"></i>
-                  Profile
+                    <i className="bi bi-search"></i>
+
+                    <input
+
+                        type="text"
+
+                        placeholder="Search customers, invoices, plans..."
+
+                    />
+
+                </div>
+
+            </div>
+
+            <div className="navbar-right">
+
+                <button className="icon-btn">
+
+                    <i className="bi bi-bell"></i>
+
                 </button>
-              </li>
 
-              <li>
-                <button className="dropdown-item">
-                  <i className="bi bi-gear me-2"></i>
-                  Settings
-                </button>
-              </li>
+                <div className="dropdown">
 
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
+                    <button
 
-              <li>
-                <button
-                  className="dropdown-item text-danger"
-                  onClick={handleLogout}
-                >
-                  <i className="bi bi-box-arrow-right me-2"></i>
-                  Logout
-                </button>
-              </li>
+                        className="profile-btn"
 
-            </ul>
+                        data-bs-toggle="dropdown"
 
-          </div>
+                    >
+
+                        <div className="avatar">
+
+                            {user?.name?.charAt(0).toUpperCase() || "A"}
+
+                        </div>
+
+                        <div className="profile-info">
+
+                            <strong>
+
+                                {user?.name || "Administrator"}
+
+                            </strong>
+
+                            <small>
+
+                                {user?.role || "Admin"}
+
+                            </small>
+
+                        </div>
+
+                        <i className="bi bi-chevron-down profile-arrow"></i>
+
+                    </button>
+
+<ul className="dropdown-menu dropdown-menu-end admin-dropdown">
+
+    <li className="dropdown-user">
+
+        <div className="dropdown-avatar">
+
+            {user?.name?.charAt(0).toUpperCase() || "A"}
 
         </div>
 
-      </div>
-    </nav>
-  );
+        <div className="dropdown-user-info">
+
+            <h6>{user?.name || "Administrator"}</h6>
+
+            <p>{user?.email}</p>
+
+            <span>{user?.role || "Administrator"}</span>
+
+        </div>
+
+    </li>
+
+    <li><hr className="dropdown-divider" /></li>
+
+    <li>
+
+        <button className="dropdown-item admin-item">
+
+            <i className="bi bi-person"></i>
+
+            <span>Profile</span>
+
+        </button>
+
+    </li>
+
+    <li>
+
+        <button className="dropdown-item admin-item">
+
+            <i className="bi bi-gear"></i>
+
+            <span>Settings</span>
+
+        </button>
+
+    </li>
+
+    <li>
+
+        <button className="dropdown-item admin-item">
+
+            <i className="bi bi-bell"></i>
+
+            <span>Notifications</span>
+
+        </button>
+
+    </li>
+
+    <li><hr className="dropdown-divider" /></li>
+
+    <li>
+
+        <button
+
+            className="dropdown-item admin-logout"
+
+            onClick={handleLogout}
+
+        >
+
+            <i className="bi bi-box-arrow-right"></i>
+
+            <span>Logout</span>
+
+        </button>
+
+    </li>
+
+</ul>
+
+                </div>
+
+            </div>
+
+        </header>
+
+    );
+
 }
 
 export default Navbar;

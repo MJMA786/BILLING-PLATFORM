@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import PlanTable from "../../components/plans/PlanTable";
 import PlanForm from "../../components/plans/PlanForm";
-
+import CustomerStatCard from "../../components/customers/CustomerStatCard";
 import planService from "../../services/planService";
+
 
 function Plans() {
   const [plans, setPlans] = useState([]);
@@ -79,21 +80,150 @@ function Plans() {
     <Layout>
       <div className="container-fluid">
 
-        <div className="d-flex justify-content-between align-items-center mb-4">
+<div className="customers-header">
 
-          <h2>Plans</h2>
+    <div>
 
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              setSelectedPlan(null);
-              setShowModal(true);
-            }}
-          >
-            + Add Plan
-          </button>
+        <span className="dashboard-tag">
 
-        </div>
+            Plan Management
+
+        </span>
+
+        <h1>
+
+            Plans
+
+        </h1>
+
+        <p>
+
+            Create and manage subscription plans.
+
+        </p>
+
+    </div>
+
+    <button
+
+        className="btn btn-primary"
+
+        onClick={() => {
+
+            setSelectedPlan(null);
+
+            setShowModal(true);
+
+        }}
+
+    >
+
+        <i className="bi bi-plus-circle-fill me-2"></i>
+
+        New Plan
+
+    </button>
+
+</div>
+<div className="row g-3 mb-4">
+
+    <div className="col-xl-3 col-md-6">
+
+        <CustomerStatCard
+
+            title="Total Plans"
+
+            value={plans.length}
+
+            subtitle="Available"
+
+            icon="bi-box-seam-fill"
+
+            color="primary"
+
+        />
+
+    </div>
+
+    <div className="col-xl-3 col-md-6">
+
+        <CustomerStatCard
+
+            title="Active"
+
+            value={
+
+                plans.filter(
+
+                    p => p.active
+
+                ).length
+
+            }
+
+            subtitle="Running"
+
+            icon="bi-check-circle-fill"
+
+            color="success"
+
+        />
+
+    </div>
+
+    <div className="col-xl-3 col-md-6">
+
+        <CustomerStatCard
+
+            title="Monthly"
+
+            value={
+
+                plans.filter(
+
+                    p => p.interval === "monthly"
+
+                ).length
+
+            }
+
+            subtitle="Billing"
+
+            icon="bi-calendar-month-fill"
+
+            color="warning"
+
+        />
+
+    </div>
+
+    <div className="col-xl-3 col-md-6">
+
+        <CustomerStatCard
+
+            title="Annual"
+
+            value={
+
+                plans.filter(
+
+                    p => p.interval === "annual"
+
+                ).length
+
+            }
+
+            subtitle="Billing"
+
+            icon="bi-stars"
+
+            color="danger"
+
+        />
+
+    </div>
+
+</div>
 
         {loading && (
           <div className="text-center">
@@ -113,14 +243,25 @@ function Plans() {
         )}
 
         {!loading && !error && (
-          <PlanTable
-            plans={plans}
-            onEdit={(plan) => {
-              setSelectedPlan(plan);
-              setShowModal(true);
-            }}
-            onDeactivate={handleDeactivate}
-          />
+          <div className="customer-table-card">
+
+    <PlanTable
+
+        plans={plans}
+
+        onEdit={(plan) => {
+
+            setSelectedPlan(plan);
+
+            setShowModal(true);
+
+        }}
+
+        onDeactivate={handleDeactivate}
+
+    />
+
+</div>
         )}
 
         <PlanForm

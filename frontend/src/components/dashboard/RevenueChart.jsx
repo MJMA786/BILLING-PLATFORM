@@ -8,18 +8,10 @@ import {
   YAxis,
 } from "recharts";
 
-const revenueData = [
-  { month: "Jan", revenue: 12000 },
-  { month: "Feb", revenue: 18000 },
-  { month: "Mar", revenue: 24000 },
-  { month: "Apr", revenue: 21000 },
-  { month: "May", revenue: 28000 },
-  { month: "Jun", revenue: 34000 },
-  { month: "Jul", revenue: 41000 },
-];
+function RevenueChart({ data = [] }) {
 
-function RevenueChart() {
   return (
+
     <div className="dashboard-widget">
 
       <div className="widget-header">
@@ -36,68 +28,104 @@ function RevenueChart() {
 
           <i className="bi bi-graph-up-arrow me-1"></i>
 
-          +18%
+          Revenue
 
         </span>
 
       </div>
 
-      <ResponsiveContainer width="100%" height={320}>
+      {data.length === 0 ? (
 
-        <AreaChart data={revenueData}>
+        <div className="empty-state">
 
-          <defs>
+          <i className="bi bi-bar-chart-line fs-1"></i>
 
-            <linearGradient
-              id="colorRevenue"
-              x1="0"
-              y1="0"
-              x2="0"
-              y2="1"
-            >
+          <p>No revenue data available.</p>
 
-              <stop
-                offset="5%"
-                stopColor="#2563EB"
-                stopOpacity={0.35}
-              />
+        </div>
 
-              <stop
-                offset="95%"
-                stopColor="#2563EB"
-                stopOpacity={0}
-              />
+      ) : (
 
-            </linearGradient>
+        <ResponsiveContainer width="100%" height={320}>
 
-          </defs>
+          <AreaChart data={data}>
 
-          <CartesianGrid
-            strokeDasharray="4 4"
-            vertical={false}
-          />
+            <defs>
 
-          <XAxis dataKey="month" />
+              <linearGradient
+                id="colorRevenue"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
 
-          <YAxis />
+                <stop
+                  offset="5%"
+                  stopColor="#2563EB"
+                  stopOpacity={0.35}
+                />
 
-          <Tooltip />
+                <stop
+                  offset="95%"
+                  stopColor="#2563EB"
+                  stopOpacity={0}
+                />
 
-          <Area
-            type="monotone"
-            dataKey="revenue"
-            stroke="#2563EB"
-            strokeWidth={3}
-            fillOpacity={1}
-            fill="url(#colorRevenue)"
-          />
+              </linearGradient>
 
-        </AreaChart>
+            </defs>
 
-      </ResponsiveContainer>
+            <CartesianGrid
+              strokeDasharray="4 4"
+              vertical={false}
+              stroke="#e5e7eb"
+            />
+
+            <XAxis
+              dataKey="month"
+              tick={{ fill: "#64748b" }}
+              axisLine={false}
+              tickLine={false}
+            />
+
+            <YAxis
+              tick={{ fill: "#64748b" }}
+              axisLine={false}
+              tickLine={false}
+            />
+
+            <Tooltip
+              formatter={(value) => [
+                `₹${Number(value).toLocaleString("en-IN")}`,
+                "Revenue",
+              ]}
+              contentStyle={{
+                borderRadius: "12px",
+                border: "none",
+                boxShadow: "0 10px 30px rgba(0,0,0,.12)",
+              }}
+            />
+
+            <Area
+              type="monotone"
+              dataKey="revenue"
+              stroke="#2563EB"
+              strokeWidth={3}
+              fill="url(#colorRevenue)"
+              animationDuration={1200}
+            />
+
+          </AreaChart>
+
+        </ResponsiveContainer>
+
+      )}
 
     </div>
+
   );
+
 }
 
 export default RevenueChart;

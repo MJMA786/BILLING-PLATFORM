@@ -5,6 +5,10 @@ from app.repositories.dashboard_repository import DashboardRepository
 
 class DashboardService:
 
+    # ==========================================
+    # Dashboard Overview
+    # ==========================================
+
     @staticmethod
     def get_dashboard_data(
         db: Session,
@@ -111,5 +115,26 @@ class DashboardService:
             "recent_invoices": recent_invoices,
 
             "notifications": notifications,
+
+        }
+
+    # ==========================================
+    # Dashboard Analytics
+    # ==========================================
+
+    @staticmethod
+    def get_dashboard_analytics(
+        db: Session,
+    ):
+
+        return {
+
+            "monthly_revenue": (
+                DashboardRepository.get_monthly_revenue(db)
+            ),
+
+            "subscription_distribution": (
+                DashboardRepository.get_subscription_distribution(db)
+            ),
 
         }

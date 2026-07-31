@@ -2,106 +2,183 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 function CustomerNavbar() {
-  const navigate = useNavigate();
 
-  const { user, logout } = useAuth();
+    const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login", { replace: true });
-  };
+    const { user, logout } = useAuth();
 
-  return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
+    const handleLogout = () => {
 
-      <div className="container-fluid">
+        logout();
 
-        <div>
-          <h4 className="mb-0 fw-bold">
-            My Subscription Portal
-          </h4>
+        navigate("/login", { replace: true });
 
-          <small className="text-muted">
-            Welcome back, {user?.name}
-          </small>
-        </div>
+    };
 
-        <div className="d-flex align-items-center">
+    return (
 
-          <button
-            type="button"
-            className="btn btn-link text-dark me-3 p-0"
-          >
-            <i className="bi bi-bell fs-5"></i>
-          </button>
+        <header className="customer-navbar">
 
-          <div className="dropdown">
+            <div className="customer-navbar-left">
 
-            <button
-              className="btn btn-light dropdown-toggle"
-              data-bs-toggle="dropdown"
-            >
-              <i className="bi bi-person-circle me-2"></i>
+                <div>
 
-              {user?.name}
-            </button>
+                    <h4 className="customer-page-title">
 
-            <ul className="dropdown-menu dropdown-menu-end">
+                        Customer Portal
 
-              <li>
-                <h6 className="dropdown-header">
-                  {user?.email}
-                </h6>
-              </li>
+                    </h4>
 
-              <li>
-                <span className="dropdown-item-text text-muted">
-                  Customer
-                </span>
-              </li>
+                    <p>
 
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
+                        Welcome back, {user?.name || "Customer"}
 
-              <li>
-                <button className="dropdown-item">
-                  <i className="bi bi-person me-2"></i>
-                  My Profile
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div className="customer-navbar-right">
+
+                <button className="customer-icon-btn">
+
+                    <i className="bi bi-bell"></i>
+
                 </button>
-              </li>
 
-              <li>
-                <button className="dropdown-item">
-                  <i className="bi bi-key me-2"></i>
-                  Change Password
-                </button>
-              </li>
+                <div className="dropdown">
 
-              <li>
-                <hr className="dropdown-divider" />
-              </li>
+                    <button
 
-              <li>
-                <button
-                  className="dropdown-item text-danger"
-                  onClick={handleLogout}
-                >
-                  <i className="bi bi-box-arrow-right me-2"></i>
-                  Logout
-                </button>
-              </li>
+                        className="customer-profile-btn dropdown-toggle"
 
-            </ul>
+                        data-bs-toggle="dropdown"
 
-          </div>
+                    >
 
-        </div>
+                        <div className="customer-nav-avatar">
 
-      </div>
+                            {user?.name?.charAt(0).toUpperCase() || "C"}
 
-    </nav>
-  );
+                        </div>
+
+                        <div className="customer-nav-info">
+
+                            <strong>
+
+                                {user?.name}
+
+                            </strong>
+
+                            <small>
+
+                                Customer
+
+                            </small>
+
+                        </div>
+
+                    </button>
+
+                    <ul className="dropdown-menu dropdown-menu-end customer-dropdown">
+
+                        <li>
+
+                            <h6 className="dropdown-header">
+
+                                {user?.email}
+
+                            </h6>
+
+                        </li>
+
+                        <li>
+
+                            <span className="dropdown-item-text text-muted">
+
+                                Customer Account
+
+                            </span>
+
+                        </li>
+
+                        <li>
+
+                            <hr className="dropdown-divider"/>
+
+                        </li>
+
+                        <li>
+
+                            <button className="dropdown-item customer-dropdown-item">
+
+                                <i className="bi bi-person"></i>
+
+                                My Profile
+
+                            </button>
+
+                        </li>
+
+                        <li>
+
+                            <button className="dropdown-item customer-dropdown-item">
+
+                                <i className="bi bi-key"></i>
+
+                                Change Password
+
+                            </button>
+
+                        </li>
+
+                        <li>
+
+                            <button className="dropdown-item customer-dropdown-item">
+
+                                <i className="bi bi-headset"></i>
+
+                                Help & Support
+
+                            </button>
+
+                        </li>
+
+                        <li>
+
+                            <hr className="dropdown-divider"/>
+
+                        </li>
+
+                        <li>
+
+                            <button
+
+                                className="dropdown-item customer-logout-item"
+
+                                onClick={handleLogout}
+
+                            >
+
+                                <i className="bi bi-box-arrow-right"></i>
+
+                                Logout
+
+                            </button>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </header>
+
+    );
+
 }
 
 export default CustomerNavbar;

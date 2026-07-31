@@ -15,11 +15,13 @@ import "../../styles/dashboard.css";
 
 function Dashboard() {
 
-  const [dashboard, setDashboard] = useState(null);
+const [dashboard, setDashboard] = useState(null);
 
-  const [loading, setLoading] = useState(true);
+const [analytics, setAnalytics] = useState(null);
 
-  const [error, setError] = useState("");
+const [loading, setLoading] = useState(true);
+
+const [error, setError] = useState("");
 
   useEffect(() => {
 
@@ -27,36 +29,49 @@ function Dashboard() {
 
   }, []);
 
-  const fetchDashboard = async () => {
+const fetchDashboard = async () => {
 
     try {
 
-      setLoading(true);
+        setLoading(true);
 
-      const data =
-        await dashboardService.getDashboard();
+        const [
 
-      setDashboard(data);
+            dashboardData,
 
-      setError("");
+            analyticsData,
+
+        ] = await Promise.all([
+
+            dashboardService.getDashboard(),
+
+            dashboardService.getDashboardAnalytics(),
+
+        ]);
+
+        setDashboard(dashboardData);
+
+        setAnalytics(analyticsData);
+
+        setError("");
 
     }
 
     catch (err) {
 
-      console.error(err);
+        console.error(err);
 
-      setError("Failed to load dashboard.");
+        setError("Failed to load dashboard.");
 
     }
 
     finally {
 
-      setLoading(false);
+        setLoading(false);
 
     }
 
-  };
+};
 
   if (loading) {
 
@@ -97,9 +112,11 @@ function Dashboard() {
 
   }
 
-  return (
+return (
 
     <Layout>
+
+        
 
       {/* ===========================
           PAGE HEADER
@@ -165,13 +182,21 @@ function Dashboard() {
 
     <div className="col-lg-8 mb-4">
 
-        <RevenueChart/>
+        <RevenueChart
+
+    data={analytics?.monthly_revenue || []}
+
+/>
 
     </div>
 
     <div className="col-lg-4 mb-4">
 
-        <SubscriptionChart/>
+        <SubscriptionChart
+
+    data={analytics?.subscription_distribution || []}
+
+/>
 
     </div>
 

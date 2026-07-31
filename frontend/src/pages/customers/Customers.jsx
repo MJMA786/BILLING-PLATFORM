@@ -4,6 +4,9 @@ import customerService from "../../services/customerService";
 import CustomerTable from "../../components/customers/CustomerTable";
 import CustomerForm from "../../components/customers/CustomerForm";
 import DeleteCustomerModal from "../../components/customers/DeleteCustomerModal";
+import StatCard from "../../components/dashboard/StatCard";
+import CustomerStatCard from "../../components/customers/CustomerStatCard";
+import "../../styles/customers.css";
 
 function Customers() {
   const [customers, setCustomers] = useState([]);
@@ -92,15 +95,121 @@ function Customers() {
     <Layout>
       <div className="container-fluid">
 
-        <div className="mb-4">
-          <h2 className="fw-bold">
-            Customers
-          </h2>
+      <div className="customers-header">
+        <div className="row g-4 mb-4">
+      </div>
 
-          <p className="text-muted">
-            View and manage all registered customers.
-          </p>
-        </div>
+        <div>
+
+        <span className="dashboard-tag">
+
+            Customer Management
+
+        </span>
+
+        <h1>
+
+            Customers
+
+        </h1>
+
+        <p>
+
+            Manage all registered customers from one place.
+
+        </p>
+
+    </div>
+    <div className="row g-3 mb-4">
+
+    <div className="col-xl-3 col-md-6">
+
+        <CustomerStatCard
+
+            title="Customers"
+
+            value={customers.length}
+
+            subtitle="Registered"
+
+            icon="bi-people-fill"
+
+            color="primary"
+
+        />
+
+    </div>
+
+    <div className="col-xl-3 col-md-6">
+
+        <CustomerStatCard
+
+            title="Countries"
+
+            value={
+                new Set(
+                    customers.map(
+                        c => c.billing_country
+                    )
+                ).size
+            }
+
+            subtitle="Coverage"
+
+            icon="bi-globe"
+
+            color="success"
+
+        />
+
+    </div>
+
+    <div className="col-xl-3 col-md-6">
+
+        <CustomerStatCard
+
+            title="Today"
+
+            value={
+                customers.filter(c =>
+
+                    new Date(c.created_at)
+                        .toDateString() ===
+                    new Date().toDateString()
+
+                ).length
+            }
+
+            subtitle="New Customers"
+
+            icon="bi-person-plus-fill"
+
+            color="warning"
+
+        />
+
+    </div>
+
+    <div className="col-xl-3 col-md-6">
+
+        <CustomerStatCard
+
+            title="Emails"
+
+            value={customers.length}
+
+            subtitle="Verified"
+
+            icon="bi-envelope-fill"
+
+            color="danger"
+
+        />
+
+    </div>
+
+</div>
+</div>
 
         {loading && (
           <div className="text-center">

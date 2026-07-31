@@ -7,13 +7,6 @@ import {
   Legend,
 } from "recharts";
 
-const data = [
-  { name: "Active", value: 68 },
-  { name: "Trial", value: 18 },
-  { name: "Past Due", value: 8 },
-  { name: "Cancelled", value: 6 },
-];
-
 const COLORS = [
   "#2563EB",
   "#10B981",
@@ -21,7 +14,12 @@ const COLORS = [
   "#EF4444",
 ];
 
-function SubscriptionChart() {
+function SubscriptionChart({ data = [] }) {
+
+  const totalSubscriptions = data.reduce(
+    (sum, item) => sum + item.value,
+    0
+  );
 
   return (
 
@@ -31,62 +29,84 @@ function SubscriptionChart() {
 
         <div>
 
-          <h5>
+          <h5>Subscription Status</h5>
 
-            Subscription Status
-
-          </h5>
-
-          <p>
-
-            Distribution of all subscriptions
-
-          </p>
+          <p>Current subscription distribution</p>
 
         </div>
 
+        <span className="trend-badge">
+
+          <i className="bi bi-pie-chart-fill me-1"></i>
+
+          {totalSubscriptions}
+
+        </span>
+
       </div>
 
-      <ResponsiveContainer
-        width="100%"
-        height={320}
-      >
+      {data.length === 0 ? (
 
-        <PieChart>
+        <div className="empty-state">
 
-          <Pie
-            data={data}
-            innerRadius={70}
-            outerRadius={100}
-            dataKey="value"
-            paddingAngle={3}
-          >
+          <i className="bi bi-pie-chart fs-1"></i>
 
-            {
+          <p>No subscription data available.</p>
 
-              data.map((entry,index)=>(
+        </div>
+
+      ) : (
+
+        <ResponsiveContainer
+          width="100%"
+          height={320}
+        >
+
+          <PieChart>
+
+            <Pie
+              data={data}
+              dataKey="value"
+              nameKey="name"
+              cx="50%"
+              cy="50%"
+              innerRadius={75}
+              outerRadius={105}
+              paddingAngle={4}
+              animationDuration={1200}
+            >
+
+              {data.map((entry, index) => (
 
                 <Cell
-
                   key={index}
-
-                  fill={COLORS[index]}
-
+                  fill={COLORS[index % COLORS.length]}
                 />
 
-              ))
+              ))}
 
-            }
+            </Pie>
 
-          </Pie>
+            <Tooltip
+              formatter={(value) => [
+                value,
+                "Subscriptions",
+              ]}
+              contentStyle={{
+                borderRadius: "12px",
+                border: "none",
+                boxShadow:
+                  "0 10px 30px rgba(0,0,0,.12)",
+              }}
+            />
 
-          <Tooltip/>
+            <Legend />
 
-          <Legend/>
+          </PieChart>
 
-        </PieChart>
+        </ResponsiveContainer>
 
-      </ResponsiveContainer>
+      )}
 
     </div>
 

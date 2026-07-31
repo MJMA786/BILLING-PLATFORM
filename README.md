@@ -1,101 +1,120 @@
 # 🚀 Subscription Management & Automated Billing Platform
 
-A full-stack web application for managing subscription-based services with automated billing, customer management, invoice generation, and payment tracking.
+<div align="center">
 
-This project provides separate portals for **Administrators** and **Customers**, enabling secure authentication, role-based authorization, and efficient subscription management.
+A modern full-stack Subscription Management Platform built with **FastAPI**, **React**, and **PostgreSQL** for managing subscription-based businesses.
+
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-green?logo=fastapi)
+![React](https://img.shields.io/badge/React-19-blue?logo=react)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+</div>
 
 ---
 
-# 📌 Features
+# 📖 Table of Contents
+
+- Overview
+- Features
+- Screenshots
+- Tech Stack
+- Architecture
+- Project Structure
+- Installation
+- User Roles
+- Database Schema
+- API Documentation
+- Current Progress
+- Security
+- Future Improvements
+- Contributing
+
+---
+
+# 🌟 Overview
+
+The **Subscription Management & Automated Billing Platform** is a full-stack SaaS application designed to manage customers, subscription plans, automated billing, invoices, and payments through dedicated Admin and Customer portals.
+
+It follows a layered backend architecture using **FastAPI**, **SQLAlchemy**, and **Repository-Service Pattern**, while the frontend is built with **React + Vite**.
+
+---
+
+# ✨ Features
 
 ## 🔐 Authentication
-- User Registration
-- Secure Login
+
 - JWT Authentication
-- Password Hashing (bcrypt)
+- Role-Based Authorization
+- Secure Password Hashing
 - Change Password
 - Protected Routes
-- Role-Based Access Control (Admin & Customer)
 
-## 👥 Customer Management
-- Add Customer
-- View Customers
-- Update Customer
-- Delete Customer
+---
 
-## 📦 Subscription Plans
-- Create Plans
-- Update Plans
-- Archive Plans
-- Monthly & Annual Billing
+## 👨‍💼 Admin Portal
 
-## 🔄 Subscription Management
-- Subscribe Customers
-- Change Plans
-- Cancel Subscriptions
-- Trial Period Support
+- Modern Analytics Dashboard
+- Customer Management
+- Plan Management
+- Subscription Management
+- Invoice Management
+- Payment Tracking
+- Reports
+- Settings
 
-## 📄 Invoice Management
-- Generate Invoices
-- Invoice Status Tracking
-- Due Date Management
-
-## 💳 Payment Management
-- Payment Records
-- Payment Status
-- Retry Support
+---
 
 ## 👤 Customer Portal
+
 - Customer Dashboard
+- Browse Available Plans
 - My Subscription
-- My Invoices
-- My Payments
-- Profile
+- Invoice History
+- Payment History
+- Profile Management
+- Support
+
+---
+
+## 💳 Billing
+
+- Billing Cycles
+- Invoice Generation
+- Payment Tracking
+- Retry Handling
+- Audit Logs
 
 ---
 
 # 🛠 Tech Stack
 
-## Backend
-- Python
-- FastAPI
-- SQLAlchemy ORM
-- PostgreSQL
-- Alembic
-- JWT Authentication
-- Passlib (bcrypt)
-- Pydantic
-
-## Frontend
-- React.js
-- Vite
-- Bootstrap 5
-- Axios
-- React Router DOM
-
-## Database
-- PostgreSQL
+| Backend | Frontend | Database |
+|---------|----------|-----------|
+| FastAPI | React | PostgreSQL |
+| SQLAlchemy | Bootstrap 5 | Alembic |
+| Pydantic | Axios | |
+| JWT | React Router | |
 
 ---
 
-# 🏗 Project Architecture
+# 🏛 Architecture
 
 ```
-React Frontend
-       │
-     Axios
-       │
-   FastAPI APIs
-       │
-   Router Layer
-       │
-   Service Layer
-       │
- Repository Layer
-       │
- SQLAlchemy ORM
-       │
- PostgreSQL
+React (Vite)
+      │
+Axios API Client
+      │
+FastAPI Routers
+      │
+Service Layer
+      │
+Repository Layer
+      │
+SQLAlchemy ORM
+      │
+PostgreSQL
 ```
 
 ---
@@ -103,111 +122,81 @@ React Frontend
 # 📂 Project Structure
 
 ```
-billing-platform/
-
+billing-platform
 │
-├── app/
-│   ├── config/
-│   ├── core/
-│   ├── database/
-│   ├── models/
-│   ├── repositories/
-│   ├── routers/
-│   ├── schemas/
-│   ├── services/
+├── app
+│   ├── api
+│   ├── config
+│   ├── database
+│   ├── models
+│   ├── repositories
+│   ├── schemas
+│   ├── services
+│   ├── utils
 │   └── main.py
 │
-├── alembic/
-├── frontend/
+├── frontend
+│   ├── src
+│   ├── public
+│   └── package.json
+│
+├── alembic
 ├── requirements.txt
-├── .env
+├── .env.example
 └── README.md
 ```
 
 ---
 
-# ⚙️ Installation Guide
+# ⚙ Installation
 
-## 1️⃣ Clone Repository
+## Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/yourusername/billing-platform.git
+
 cd billing-platform
 ```
 
 ---
 
-## 2️⃣ Create Virtual Environment
-
-### Windows
+## Backend
 
 ```bash
 python -m venv venv
+
 venv\Scripts\activate
-```
 
-### Linux / macOS
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
----
-
-## 3️⃣ Install Backend Dependencies
-
-```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## 4️⃣ Install Frontend Dependencies
+## Frontend
 
 ```bash
 cd frontend
+
 npm install
 ```
 
 ---
 
-## 5️⃣ Configure PostgreSQL
-
-Create a PostgreSQL database.
-
-Example:
-
-```sql
-CREATE DATABASE billing_platform;
-```
-
----
-
-## 6️⃣ Configure Environment Variables
-
-Create a `.env` file inside the backend project.
+## Configure Environment
 
 ```env
-DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/billing_platform
+DATABASE_URL="your database url here"
 
-SECRET_KEY=YOUR_SECRET_KEY
+SECRET_KEY="your security key here"
 
 ALGORITHM=HS256
 
-ACCESS_TOKEN_EXPIRE_MINUTES=60
+ACCESS_TOKEN_EXPIRE_MINUTES=60 # you can change the expiration time
 ```
-
-Replace:
-
-- `YOUR_PASSWORD`
-- `YOUR_SECRET_KEY`
-
-with your local configuration.
 
 ---
 
-## 7️⃣ Run Database Migrations
+## Run Migrations
 
 ```bash
 alembic upgrade head
@@ -215,27 +204,13 @@ alembic upgrade head
 
 ---
 
-## 8️⃣ Start Backend
-
-If `main.py` is inside the `app` folder:
+## Start Backend
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-If `main.py` is in the project root:
-
-```bash
-uvicorn main:app --reload
-```
-
-Backend:
-
-```
-http://127.0.0.1:8000
-```
-
-Swagger Documentation:
+Swagger
 
 ```
 http://127.0.0.1:8000/docs
@@ -243,14 +218,11 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## 9️⃣ Start Frontend
+## Start Frontend
 
 ```bash
-cd frontend
 npm run dev
 ```
-
-Frontend:
 
 ```
 http://localhost:5173
@@ -258,19 +230,30 @@ http://localhost:5173
 
 ---
 
-# 🔑 Admin Access
+# 👥 User Roles
 
-Newly registered users have the default role.
+## Admin
 
-To make a user an administrator:
+- Dashboard
+- Customers
+- Plans
+- Subscriptions
+- Invoices
+- Payments
+- Reports
+- Settings
 
-```sql
-UPDATE users
-SET role='admin'
-WHERE email='your_email@example.com';
-```
+---
 
-Log in again after updating the role.
+## Customer
+
+- Dashboard
+- Available Plans
+- Subscription
+- Invoices
+- Payments
+- Profile
+- Support
 
 ---
 
@@ -288,116 +271,55 @@ Log in again after updating the role.
 
 ---
 
-# 👥 User Roles
-
-## Admin
-
-- Dashboard
-- Customer Management
-- Plan Management
-- Subscription Management
-- Invoice Management
-- Payment Management
-
----
-
-## Customer
-
-- Customer Dashboard
-- My Subscription
-- My Invoices
-- My Payments
-- Profile
-
----
-
-# 🔄 Git Workflow
-
-Pull latest changes
-
-```bash
-git pull origin main
-```
-
-Create a new feature branch
-
-```bash
-git checkout -b feature/feature-name
-```
-
-Commit changes
-
-```bash
-git add .
-git commit -m "Added new feature"
-```
-
-Push changes
-
-```bash
-git push origin feature/feature-name
-```
-
-Create a Pull Request before merging into `main`.
-
----
-
-# 📌 Current Progress
-
-### ✅ Completed
+# 🔐 Security
 
 - JWT Authentication
+- Password Hashing (bcrypt)
 - Role-Based Authorization
+- Environment Variables
+- Protected API Routes
+
+---
+
+# 🚀 Current Progress
+
+## ✅ Completed
+
+- Authentication System
+- Admin Portal
+- Customer Portal
 - Customer CRUD
-- Customer Dashboard
-- Admin Dashboard
+- Plan Management
+- Dashboard Analytics
+- Modern Responsive UI
 - PostgreSQL Integration
-- SQLAlchemy ORM
 - Alembic Migrations
-- Responsive React Frontend
 
-### 🚧 In Progress
+## 🚧 In Progress
 
-- Subscription Plans
 - Subscription Lifecycle
 - Automated Billing
-- Invoice Generation
-- Payment Processing
+- Invoice PDF Generation
+- Payment Workflow
 - Reports & Analytics
 
 ---
 
-# 🛡 Security
+# 🛣 Roadmap
 
-- JWT Authentication
-- Password Hashing using bcrypt
-- Protected API Endpoints
-- Role-Based Authorization
-- Environment Variables for Secrets
-
----
-
-# 🤝 Guidelines
-
-- Follow the existing folder structure.
-- Keep business logic inside the **Service Layer**.
-- Database operations should only be performed through the **Repository Layer**.
-- Do not write SQL directly inside routers.
-- Use feature branches for new development.
-- Create Pull Requests before merging.
+- Email Notifications
+- Payment Gateway Integration
+- Reports Export
+- Multi-Tenant Support
+- Docker Deployment
+- CI/CD Pipeline
 
 ---
 
-# 📷 Screenshots
+# 👨‍💻 Author
 
-_Add screenshots of the application here._
-
----
-
-# 👨‍💻 Contributors
-
-- Mahammad Jaheer Meera Ahmad
+**Mahammad Jaheer Meera Ahmad**
 
 ---
 
-⭐ If you like this project, consider giving it a star!
+⭐ If you found this project useful, consider giving it a star!

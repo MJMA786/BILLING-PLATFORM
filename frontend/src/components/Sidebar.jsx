@@ -1,76 +1,164 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Sidebar() {
-  const menuItems = [
-    {
-      path: "/dashboard",
-      icon: "bi-speedometer2",
-      label: "Dashboard",
-    },
-    {
-      path: "/customers",
-      icon: "bi-people",
-      label: "Customers",
-    },
-    {
-      path: "/plans",
-      icon: "bi-box-seam",
-      label: "Plans",
-    },
-    {
-      path: "/subscriptions",
-      icon: "bi-arrow-repeat",
-      label: "Subscriptions",
-    },
-    {
-      path: "/invoices",
-      icon: "bi-receipt",
-      label: "Invoices",
-    },
-    {
-      path: "/payments",
-      icon: "bi-credit-card",
-      label: "Payments",
-    },
-  ];
 
-  return (
-    <div
-      className="bg-dark text-white d-flex flex-column shadow"
-      style={{ width: "260px", minHeight: "100vh" }}
-    >
-      {/* Logo */}
-      <div className="text-center py-4 border-bottom">
-        <h4 className="fw-bold mb-1">
-          <i className="bi bi-layers-fill me-2"></i>
-          BillingPro
-        </h4>
-        <small className="text-secondary">
-          Subscription Platform
-        </small>
-      </div>
+    const { user } = useAuth();
 
-      {/* Navigation */}
-      <div className="flex-grow-1 mt-3 px-2">
-        {menuItems.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            className={({ isActive }) =>
-              `nav-link d-flex align-items-center px-3 py-2 mb-2 rounded ${
-                isActive
-                  ? "bg-primary text-white"
-                  : "text-light"
-              }`
-            }
-          >
-            <i className={`bi ${item.icon} me-3`}></i>
-            {item.label}
-          </NavLink>
-        ))}
-      </div>
-    </div>
-  );
+    const menuItems = [
+
+        {
+            path: "/dashboard",
+            icon: "bi-grid-1x2-fill",
+            label: "Dashboard",
+        },
+
+        {
+            path: "/customers",
+            icon: "bi-people-fill",
+            label: "Customers",
+        },
+
+        {
+            path: "/plans",
+            icon: "bi-box-seam-fill",
+            label: "Plans",
+        },
+
+        {
+            path: "/subscriptions",
+            icon: "bi-arrow-repeat",
+            label: "Subscriptions",
+        },
+
+        {
+            path: "/invoices",
+            icon: "bi-receipt-cutoff",
+            label: "Invoices",
+        },
+
+        {
+            path: "/payments",
+            icon: "bi-credit-card-2-front-fill",
+            label: "Payments",
+        },
+
+        {
+            path: "/reports",
+            icon: "bi-bar-chart-fill",
+            label: "Reports",
+        },
+
+        {
+            path: "/settings",
+            icon: "bi-gear-fill",
+            label: "Settings",
+        },
+
+    ];
+
+    return (
+
+        <aside className="sidebar">
+
+            {/* Logo */}
+
+            <div className="sidebar-logo">
+
+                <div className="logo-circle">
+
+                    <i className="bi bi-layers-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h4>
+
+                        BillingPro
+
+                    </h4>
+
+                    <span>
+
+                        Subscription Platform
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            {/* Navigation */}
+
+            <nav className="sidebar-menu">
+
+                {menuItems.map((item) => (
+
+                    <NavLink
+
+                        key={item.path}
+
+                        to={item.path}
+
+                        className={({ isActive }) =>
+
+                            isActive
+
+                                ? "sidebar-link active"
+
+                                : "sidebar-link"
+
+                        }
+
+                    >
+
+                        <i className={`bi ${item.icon}`}></i>
+
+                        <span>
+
+                            {item.label}
+
+                        </span>
+
+                    </NavLink>
+
+                ))}
+
+            </nav>
+
+            {/* Bottom Profile */}
+
+            <div className="sidebar-profile">
+
+                <div className="profile-avatar">
+
+                    {user?.name?.charAt(0).toUpperCase() || "A"}
+
+                </div>
+
+                <div>
+
+                    <h6>
+
+                        {user?.name || "Administrator"}
+
+                    </h6>
+
+                    <span>
+
+                        {user?.role || "Admin"}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    );
+
 }
 
 export default Sidebar;

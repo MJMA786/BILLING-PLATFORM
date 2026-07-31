@@ -49,3 +49,26 @@ class DashboardResponse(BaseModel):
     recent_invoices: list[DashboardInvoice]
 
     notifications: list[DashboardNotification]
+# ==========================================
+# Dashboard Analytics
+# ==========================================
+
+class MonthlyRevenue(BaseModel):
+
+    month: str
+
+    revenue: float
+
+
+class SubscriptionDistribution(BaseModel):
+
+    name: str
+
+    value: int
+
+
+class DashboardAnalyticsResponse(BaseModel):
+
+    monthly_revenue: list[MonthlyRevenue]
+
+    subscription_distribution: list[SubscriptionDistribution]

@@ -265,3 +265,168 @@ class DashboardRepository:
             or 0
 
         )
+        # ==========================================
+    # Dashboard Analytics
+    # ==========================================
+
+    @staticmethod
+    def get_monthly_revenue(
+        db: Session,
+    ):
+
+        monthly_data = []
+
+        for month in range(1, 13):
+
+            revenue = (
+
+                db.query(
+                    func.sum(Payment.amount)
+                )
+
+                .filter(
+
+                    Payment.status == PaymentStatus.SUCCEEDED,
+
+                    func.extract(
+                        "month",
+                        Payment.attempted_at,
+                    ) == month,
+
+                )
+
+                .scalar()
+
+            )
+
+            monthly_data.append({
+
+                "month": [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                ][month - 1],
+
+                "revenue": float(revenue or 0),
+
+            })
+
+        return monthly_data
+
+    @staticmethod
+    def get_subscription_distribution(
+        db: Session,
+    ):
+
+        return [
+
+            {
+
+                "name": "Active",
+
+                "value": (
+
+                    db.query(
+                        func.count(
+                            Subscription.id
+                        )
+                    )
+
+                    .filter(
+                        Subscription.status
+                        == SubscriptionStatus.ACTIVE
+                    )
+
+                    .scalar()
+
+                    or 0
+
+                ),
+
+            },
+
+            {
+
+                "name": "Trial",
+
+                "value": (
+
+                    db.query(
+                        func.count(
+                            Subscription.id
+                        )
+                    )
+
+                    .filter(
+                        Subscription.status
+                        == SubscriptionStatus.TRIAL
+                    )
+
+                    .scalar()
+
+                    or 0
+
+                ),
+
+            },
+
+            {
+
+                "name": "Past Due",
+
+                "value": (
+
+                    db.query(
+                        func.count(
+                            Subscription.id
+                        )
+                    )
+
+                    .filter(
+                        Subscription.status
+                        == SubscriptionStatus.PAST_DUE
+                    )
+
+                    .scalar()
+
+                    or 0
+
+                ),
+
+            },
+
+            {
+
+                "name": "Cancelled",
+
+                "value": (
+
+                    db.query(
+                        func.count(
+                            Subscription.id
+                        )
+                    )
+
+                    .filter(
+                        Subscription.status
+                        == SubscriptionStatus.CANCELLED
+                    )
+
+                    .scalar()
+
+                    or 0
+
+                ),
+
+            },
+
+        ]

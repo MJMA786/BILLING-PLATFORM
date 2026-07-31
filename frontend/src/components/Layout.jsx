@@ -1,18 +1,23 @@
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
+import "../styles/admin.css";
 
 function Layout({ children }) {
   return (
     <div className="d-flex">
       <Sidebar />
 
-      <div className="flex-grow-1">
-        <Navbar />
+      <div className="layout-content">
 
-        <main className="container-fluid py-4 px-4">
-          {children}
-        </main>
-      </div>
+    <Navbar />
+
+    <main className="main-content">
+
+        {children}
+
+    </main>
+
+</div>
     </div>
   );
 }

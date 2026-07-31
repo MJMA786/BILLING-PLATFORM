@@ -1,47 +1,101 @@
 function PlanCard({ plan }) {
-  return (
-    <div className="card shadow h-100">
 
-      <div className="card-body">
+    const isPopular = plan.name?.toLowerCase() === "premium";
 
-        <h4 className="card-title">
-          {plan.name}
-        </h4>
+    return (
 
-        <p className="text-muted">
-          {plan.description}
-        </p>
+        <div className={`pricing-card ${isPopular ? "popular-plan" : ""}`}>
 
-        <h3 className="text-primary mb-3">
-          ₹{Number(plan.price).toFixed(2)}
-        </h3>
+            {isPopular && (
 
-        <p className="mb-3">
-          <strong>Billing:</strong>{" "}
-          <span className="text-capitalize">
-            {plan.interval}
-          </span>
-        </p>
+                <div className="popular-badge">
 
-        <span className="badge bg-success mb-3">
-          Available
-        </span>
+                    ⭐ Most Popular
 
-        <div className="d-grid">
-          <button
-            className="btn btn-primary"
-            onClick={() =>
-              alert("Subscription module coming soon!")
-            }
-          >
-            Choose Plan
-          </button>
+                </div>
+
+            )}
+
+            <div className="pricing-header">
+
+                <div className="pricing-icon">
+
+                    <i
+                        className={`bi ${
+                            plan.name?.toLowerCase() === "starter"
+                                ? "bi-box"
+                                : plan.name?.toLowerCase() === "premium"
+                                ? "bi-stars"
+                                : "bi-building"
+                        }`}
+                    ></i>
+
+                </div>
+
+                <h3>{plan.name}</h3>
+
+            </div>
+
+            <div className="pricing-price">
+
+                <span className="currency">₹</span>
+
+                <span className="amount">
+
+                    {Number(plan.price).toFixed(0)}
+
+                </span>
+
+                <span className="interval">
+
+                    / {plan.interval}
+
+                </span>
+
+            </div>
+<div className="pricing-divider"></div>
+
+<div className="plan-description">
+
+    <h6>
+
+        Plan Description
+
+    </h6>
+
+    <p>
+
+        {plan.description || "No description available."}
+
+    </p>
+
+</div>
+
+            <div className="mt-auto">
+
+                <button
+                    className={`btn w-100 ${
+                        isPopular
+                            ? "btn-primary"
+                            : "btn-outline-primary"
+                    }`}
+                    onClick={() =>
+                        alert("Subscription module coming soon!")
+                    }
+                >
+
+                    <i className="bi bi-arrow-right-circle me-2"></i>
+
+                    Choose Plan
+
+                </button>
+
+            </div>
+
         </div>
 
-      </div>
+    );
 
-    </div>
-  );
 }
 
 export default PlanCard;

@@ -30,10 +30,39 @@ function CustomerPlans() {
   return (
 
       <div className="container-fluid">
+<div className="plans-header">
 
-        <h2 className="mb-4">
-          Available Plans
-        </h2>
+    <div>
+
+        <span className="customer-tag">
+
+            Pricing Plans
+
+        </span>
+
+        <h1>
+
+            Choose Your Perfect Plan
+
+        </h1>
+
+        <p>
+
+            Upgrade or switch your subscription anytime.
+
+        </p>
+
+    </div>
+
+    <div className="plans-count">
+
+        <i className="bi bi-grid-3x3-gap-fill me-2"></i>
+
+        {plans.length} Active Plans
+
+    </div>
+
+</div>
 
         {loading && (
           <div className="text-center">
@@ -52,7 +81,7 @@ function CustomerPlans() {
 
         {!loading && !error && (
 
-          <div className="row">
+          <div className="row g-4 mt-2">
 
             {plans.map((plan) => (
 
