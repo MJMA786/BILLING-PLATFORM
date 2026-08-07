@@ -1,9 +1,7 @@
-function Dashboard() {
-  return (
-    <div className="container mt-5">
-      <h2>Reset Password</h2>
-    </div>
-  );
+import ForgotPassword from "./ForgotPassword";
+
+function ResetPassword() {
+  return <ForgotPassword />;
 }
 
-export default Dashboard;
+export default ResetPassword;

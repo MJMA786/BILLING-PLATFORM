@@ -1,325 +1,240 @@
-# 🚀 Subscription Management & Automated Billing Platform
+# 🚀 Subly - Subscription Management & Automated Billing Platform
 
 <div align="center">
 
-A modern full-stack Subscription Management Platform built with **FastAPI**, **React**, and **PostgreSQL** for managing subscription-based businesses.
+A modern full-stack Subscription Management & Automated Billing Platform built with **FastAPI**, **React**, **PostgreSQL**, **Google OAuth 2.0**, and **ReportLab PDF Engine**.
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115-green?logo=fastapi)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.139-green?logo=fastapi)
 ![React](https://img.shields.io/badge/React-19-blue?logo=react)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?logo=postgresql)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple?logo=bootstrap)
+![Google OAuth](https://img.shields.io/badge/Google_OAuth-2.0-red?logo=google)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 </div>
 
 ---
 
-# 📖 Table of Contents
+## 📖 Table of Contents
 
-- Overview
-- Features
-- Screenshots
-- Tech Stack
-- Architecture
-- Project Structure
-- Installation
-- User Roles
-- Database Schema
-- API Documentation
-- Current Progress
-- Security
-- Future Improvements
-- Contributing
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [Tech Stack](#-tech-stack)
+- [System Architecture](#-system-architecture)
+- [Project Structure](#-project-structure)
+- [Installation & Setup](#-installation--setup)
+- [User Roles & Features](#-user-roles--features)
+- [Database Schema](#-database-schema)
+- [API Documentation](#-api-documentation)
+- [Security & Authentication](#-security--authentication)
+- [Author](#-author)
 
 ---
 
-# 🌟 Overview
+## 🌟 Overview
 
-The **Subscription Management & Automated Billing Platform** is a full-stack SaaS application designed to manage customers, subscription plans, automated billing, invoices, and payments through dedicated Admin and Customer portals.
+**Subly** is a enterprise-grade **Subscription Management & Automated Billing Platform** designed to streamline recurring billing, customer subscription lifecycles, automated GST/tax invoice generation, payment ledgers, and priority support desks.
 
-It follows a layered backend architecture using **FastAPI**, **SQLAlchemy**, and **Repository-Service Pattern**, while the frontend is built with **React + Vite**.
-
----
-
-# ✨ Features
-
-## 🔐 Authentication
-
-- JWT Authentication
-- Role-Based Authorization
-- Secure Password Hashing
-- Change Password
-- Protected Routes
+It features a decoupled architecture using a **FastAPI (Repository-Service Layer)** backend and a **React + Vite** SPA frontend with high-contrast categorised sidebars and frosted glassmorphic footers.
 
 ---
 
-## 👨‍💼 Admin Portal
+## ✨ Key Features
 
-- Modern Analytics Dashboard
-- Customer Management
-- Plan Management
-- Subscription Management
-- Invoice Management
-- Payment Tracking
-- Reports
-- Settings
+### 🔐 Authentication & Google OAuth 2.0
+- **Dual Authentication**: Standard Email/Password Auth & Google OAuth 2.0 Single Sign-On (SSO).
+- **Auto-Provisioning**: Automatic creation of linked `User` and `Customer` billing profiles upon first Google Sign-In.
+- **JWT Token Flow**: Secure Access & Refresh Tokens, role-based route guards, and password reset code verification via HTML email.
 
----
+### 👨‍💼 Admin Portal
+- **Analytics Dashboard**: Real-time revenue metrics, active vs cancelled subscriptions, pending billing cycles, and payment ledgers.
+- **Customer Management**: Full customer CRUD, tax ID / GSTIN tracking, billing addresses, and account status toggles.
+- **Plan Management**: Flexible tier creation, monthly/yearly billing intervals, price configuration, and feature entitlements.
+- **Subscription Operations**: Manual activation, plan upgrades/downgrades, auto-renewal controls, and cancellation handling.
+- **Invoice & GST Billing**: PDF invoice generation, tax calculation, voiding, and manual settlement.
+- **Payment & Refund Ledger**: Transaction tracking, payment retry logs, audit logs, and refund processing.
+- **System Settings**: Global currency configuration, default tax percentages, company contact details, and platform rules.
 
-## 👤 Customer Portal
+### 👤 Customer Portal
+- **Customer Dashboard**: Overview stat cards (`Active Plan`, `Billing Cycle`, `Paid Amount`, `Open Invoices`), recent receipts, and quick actions.
+- **Available Plans**: Plan pricing grid, billing interval toggles, feature checklists, and 1-click modal checkout.
+- **My Subscription**: Subscription progress tracking (`Days Elapsed` / `Days Remaining`), entitlement cards, auto-renew toggles, and cancellation/resumption controls.
+- **My Invoices**: Multi-field smart search, clear search button, status dropdown filter, PDF statement download, and client-side CSV exports.
+- **My Payments**: Transaction history ledger, payment method filters, clear/reset buttons, slide-over payment drawer, and CSV exports.
+- **My Profile**: Dual support for Google SSO (linked Google avatar photo, SSO badge) and Email/Password credentials, plus full GSTIN and billing address management.
+- **Help & Customer Support Desk**: 24/7 Priority Ticket submission desk, category selection, priority level dropdown, ticket reference generator (`TICKET-#...`), collapsible FAQ accordion, and automated HTML email ticket acknowledgments.
 
-- Customer Dashboard
-- Browse Available Plans
-- My Subscription
-- Invoice History
-- Payment History
-- Profile Management
-- Support
-
----
-
-## 💳 Billing
-
-- Billing Cycles
-- Invoice Generation
-- Payment Tracking
-- Retry Handling
-- Audit Logs
+### 📧 Automated HTML Email Engine & PDF Generator
+- **Email Service (`smtplib`)**: HTML email dispatch for welcome messages, subscription confirmations, PDF invoice receipts, password reset verification codes, and support ticket confirmations.
+- **ReportLab PDF Engine**: Dynamic PDF generation for GST tax invoices with itemized pricing, tax breakdown, billing addresses, and company branding.
 
 ---
 
-# 🛠 Tech Stack
+## 🛠 Tech Stack
 
-| Backend | Frontend | Database |
-|---------|----------|-----------|
-| FastAPI | React | PostgreSQL |
-| SQLAlchemy | Bootstrap 5 | Alembic |
-| Pydantic | Axios | |
-| JWT | React Router | |
+| Layer | Technologies |
+|---|---|
+| **Backend** | Python 3.12, FastAPI, SQLAlchemy 2.0 (ORM), Alembic, Pydantic v2, ReportLab, Smtplib, PyJWT |
+| **Frontend** | React 19, Vite, Bootstrap 5.3, Lucide React, Axios, React Router v7 |
+| **Database** | PostgreSQL 16 / SQLite (Local Dev) |
+| **Security & Auth** | Google OAuth 2.0, Passlib (Argon2 / Bcrypt), OAuth2 Password Bearer |
 
 ---
 
-# 🏛 Architecture
+## 🏛 System Architecture
 
 ```
-React (Vite)
-      │
-Axios API Client
-      │
-FastAPI Routers
-      │
-Service Layer
-      │
-Repository Layer
-      │
-SQLAlchemy ORM
-      │
-PostgreSQL
+                                  ┌────────────────────────┐
+                                  │   React + Vite SPA     │
+                                  └───────────┬────────────┘
+                                              │ REST API / JSON
+                                  ┌───────────▼────────────┐
+                                  │   FastAPI Middleware   │
+                                  └───────────┬────────────┘
+                                              │
+                    ┌─────────────────────────┼─────────────────────────┐
+                    │                         │                         │
+         ┌──────────▼──────────┐   ┌──────────▼──────────┐   ┌──────────▼──────────┐
+         │ Auth & OAuth Router │   │ Subscriptions/Plans │   │ Billing & Invoices  │
+         └──────────┬──────────┘   └──────────┬──────────┘   └──────────┬──────────┘
+                    │                         │                         │
+                    └─────────────────────────┼─────────────────────────┘
+                                              │
+                                  ┌───────────▼────────────┐
+                                  │     Service Layer      │
+                                  └───────────┬────────────┘
+                                              │
+                                  ┌───────────▼────────────┐
+                                  │   Repository Layer     │
+                                  └───────────┬────────────┘
+                                              │
+                                  ┌───────────▼────────────┐
+                                  │    SQLAlchemy ORM      │
+                                  └───────────┬────────────┘
+                                              │
+                                  ┌───────────▼────────────┐
+                                  │    PostgreSQL DB       │
+                                  └────────────────────────┘
 ```
 
 ---
 
-# 📂 Project Structure
+## 📂 Project Structure
 
 ```
-billing-platform
+billing-platform/
+├── backend/
+│   ├── alembic/                    # Database migrations
+│   ├── app/
+│   │   ├── api/                    # FastAPI endpoints (Auth, Customer, Plans, Invoices, Support)
+│   │   ├── core/                   # Security, dependencies, JWT handlers
+│   │   ├── database/               # DB connection & session factory
+│   │   ├── models/                 # SQLAlchemy models (User, Customer, Plan, Subscription, Invoice, Payment)
+│   │   ├── repositories/           # Data access repository layer
+│   │   ├── schemas/                # Pydantic validation schemas
+│   │   ├── services/               # Business logic & Email/PDF services
+│   │   └── main.py                 # FastAPI application entry point
+│   ├── .env                        # Environment configurations
+│   ├── alembic.ini                 # Alembic configuration
+│   └── requirements.txt            # Pinned Python dependencies
 │
-├── app
-│   ├── api
-│   ├── config
-│   ├── database
-│   ├── models
-│   ├── repositories
-│   ├── schemas
-│   ├── services
-│   ├── utils
-│   └── main.py
-│
-├── frontend
-│   ├── src
-│   ├── public
-│   └── package.json
-│
-├── alembic
-├── requirements.txt
-├── .env.example
+├── frontend/
+│   ├── src/
+│   │   ├── assets/                 # Brand assets & images
+│   │   ├── components/             # Reusable UI components & Sidebars
+│   │   ├── context/                # AuthContext & ToastContext
+│   │   ├── pages/                  # Admin & Customer Portal pages
+│   │   ├── services/               # Axios API client services
+│   │   └── styles/                 # Glassmorphic & layout CSS
+│   ├── .env                        # Frontend environment variables
+│   ├── package.json                # React dependencies
+│   └── vite.config.js              # Vite build runner
 └── README.md
 ```
 
 ---
 
-# ⚙ Installation
+## ⚙ Installation & Setup
 
-## Clone Repository
+### 1. Prerequisites
+- **Python 3.12+**
+- **Node.js 18+** & `npm`
+- **PostgreSQL 16** (or SQLite)
 
+### 2. Backend Setup
 ```bash
-git clone https://github.com/yourusername/billing-platform.git
+cd backend
 
-cd billing-platform
-```
-
----
-
-## Backend
-
-```bash
+# Create virtual environment
 python -m venv venv
 
-venv\Scripts\activate
+# Activate virtual environment (Windows)
+.\venv\Scripts\activate
 
+# Install dependencies
 pip install -r requirements.txt
+
+# Run database migrations
+alembic upgrade head
+
+# Start Uvicorn backend server
+uvicorn app.main:app --reload
 ```
+Backend API will run at `http://127.0.0.1:8000`. Interactive Swagger docs available at `http://127.0.0.1:8000/docs`.
 
----
-
-## Frontend
-
+### 3. Frontend Setup
 ```bash
 cd frontend
 
+# Install dependencies
 npm install
-```
 
----
-
-## Configure Environment
-
-```env
-DATABASE_URL="your database url here"
-
-SECRET_KEY="your security key here"
-
-ALGORITHM=HS256
-
-ACCESS_TOKEN_EXPIRE_MINUTES=60 # you can change the expiration time
-```
-
----
-
-## Run Migrations
-
-```bash
-alembic upgrade head
-```
-
----
-
-## Start Backend
-
-```bash
-uvicorn app.main:app --reload
-```
-
-Swagger
-
-```
-http://127.0.0.1:8000/docs
-```
-
----
-
-## Start Frontend
-
-```bash
+# Start Vite dev server
 npm run dev
 ```
-
-```
-http://localhost:5173
-```
+Frontend application will run at `http://localhost:5173`.
 
 ---
 
-# 👥 User Roles
+## 👥 User Roles & Features
 
-## Admin
-
-- Dashboard
-- Customers
-- Plans
-- Subscriptions
-- Invoices
-- Payments
-- Reports
-- Settings
+| Role | Accessible Sections & Capabilities |
+|---|---|
+| **Admin** | Dashboard Analytics, Customer Directory, Plan Tier Manager, Subscriptions, Invoices & Tax Voiding, Payments & Refunds, Audit Logs, System Settings |
+| **Customer** | Dashboard Summary, Available Plans & Checkout, My Subscription & Auto-Renew, My Invoices & PDF Receipts, My Payments Ledger, My Profile & GSTIN, Help & Support Ticket Desk |
 
 ---
 
-## Customer
+## 🗄 Database Schema
 
-- Dashboard
-- Available Plans
-- Subscription
-- Invoices
-- Payments
-- Profile
-- Support
-
----
-
-# 🗄 Database Tables
-
-- Users
-- Customers
-- Plans
-- Subscriptions
-- Billing Cycles
-- Invoices
-- Payments
-- Payment Retries
-- Audit Logs
+The system models the following core entities:
+- **`users`**: Platform user credentials, roles (`admin`, `customer`), Google OAuth IDs, profile pictures.
+- **`customers`**: Customer billing profile, company name, phone, tax ID / GSTIN, country, street address.
+- **`plans`**: Subscription tier name, price, billing interval (`monthly`, `yearly`), feature JSON, active state.
+- **`subscriptions`**: Active customer subscription, current period start/end, status (`active`, `cancelled`, `past_due`).
+- **`billing_cycles`**: Recurring billing interval records tracking cycle dates and invoice linkage.
+- **`invoices`**: Tax invoices, invoice numbers, subtotal, tax amount, total, payment status, PDF file path.
+- **`payments`**: Payment transaction ledger, payment method (`credit_card`, `upi`, `net_banking`), transaction reference, status.
+- **`payment_retries`**: Automated retry attempts for failed invoice payments.
+- **`audit_logs`**: System audit trail for administrative actions.
+- **`system_settings`**: Global platform settings (default currency, tax percentage, support email).
 
 ---
 
-# 🔐 Security
+## 🔐 Security & Best Practices
 
-- JWT Authentication
-- Password Hashing (bcrypt)
-- Role-Based Authorization
-- Environment Variables
-- Protected API Routes
-
----
-
-# 🚀 Current Progress
-
-## ✅ Completed
-
-- Authentication System
-- Admin Portal
-- Customer Portal
-- Customer CRUD
-- Plan Management
-- Dashboard Analytics
-- Modern Responsive UI
-- PostgreSQL Integration
-- Alembic Migrations
-
-## 🚧 In Progress
-
-- Subscription Lifecycle
-- Automated Billing
-- Invoice PDF Generation
-- Payment Workflow
-- Reports & Analytics
+- **JWT Token Authentication**: Stateful access & refresh token rotation with HTTP authorization headers.
+- **Password Security**: Argon2 / Bcrypt password hashing.
+- **Role-Based Guarding**: Both backend dependency injection (`get_current_admin_user`) and React frontend route protection (`ProtectedRoute`).
+- **CORS Handling**: Configured origins for local development servers (`http://localhost:5173`, `http://127.0.0.1:5173`).
 
 ---
 
-# 🛣 Roadmap
-
-- Email Notifications
-- Payment Gateway Integration
-- Reports Export
-- Multi-Tenant Support
-- Docker Deployment
-- CI/CD Pipeline
-
----
-
-# 👨‍💻 Author
+## 👨‍💻 Author
 
 **Mahammad Jaheer Meera Ahmad**
 
 ---
 
-⭐ If you found this project useful, consider giving it a star!
+⭐ *If you found Subly useful, consider starring the repository!*

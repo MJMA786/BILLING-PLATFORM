@@ -2,77 +2,77 @@ import { useMemo } from "react";
 
 function DashboardHeader() {
 
-    const today = useMemo(() => {
+  const today = useMemo(() => {
 
-        return new Date().toLocaleDateString("en-IN", {
+    return new Date().toLocaleDateString("en-IN", {
 
-            weekday: "long",
+      weekday: "long",
 
-            day: "numeric",
+      day: "numeric",
 
-            month: "long",
+      month: "long",
 
-            year: "numeric",
+      year: "numeric",
 
-        });
+    });
 
-    }, []);
+  }, []);
 
-    const hour = new Date().getHours();
+  const hour = new Date().getHours();
 
-    let greeting = "Good Evening";
+  let greeting = "Good Evening";
 
-    if (hour < 12) {
+  if (hour < 12) {
 
-        greeting = "Good Morning";
+    greeting = "Good Morning";
 
-    } else if (hour < 17) {
+  } else if (hour < 17) {
 
-        greeting = "Good Afternoon";
+    greeting = "Good Afternoon";
 
-    }
+  }
 
-    return (
+  return (
 
-        <div className="dashboard-header">
+    <div className="dashboard-header">
 
-            <div>
+      <div>
 
-                <span className="dashboard-tag">
+        <span className="dashboard-tag">
 
-                    Admin Dashboard
+          Admin Dashboard
 
-                </span>
+        </span>
 
-                <h1>
+        <h1>
 
-                    {greeting} Admin, Welcome Back!
+          {greeting} Admin, Welcome Back!
 
-                </h1>
+        </h1>
 
-                <p>
+        <p>
 
-                    Here's what's happening with your billing platform today.
+          Here's what's happening with your billing platform today.
 
-                </p>
+        </p>
 
-            </div>
+      </div>
 
-            <div className="dashboard-actions">
+      <div className="dashboard-actions">
 
-                <div className="dashboard-date">
+        <div className="dashboard-date">
 
-                    <i className="bi bi-calendar3 me-2"></i>
+          <i className="bi bi-calendar3 me-2"></i>
 
-                    {today}
-
-                </div>
-
-            </div>
+          {today}
 
         </div>
 
-    );
+      </div>
+
+    </div>
+
+  );
 
 }
 

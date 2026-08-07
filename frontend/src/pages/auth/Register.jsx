@@ -183,7 +183,7 @@ function Register() {
         <div className="brand">
 
           <h1>
-            Billing Platform
+            Subly
           </h1>
 
           <p>

@@ -39,7 +39,7 @@ function AuthFooter({ loginPage = true }) {
 
             <small>
 
-                © {new Date().getFullYear()} Billing Platform
+                © {new Date().getFullYear()} Subly. All rights reserved.
 
             </small>
 

@@ -4,14 +4,14 @@ import CustomerSidebar from "./CustomerSidebar";
 function CustomerLayout({ children }) {
   return (
     <div className="d-flex">
-
       <CustomerSidebar />
 
       <div
         className="flex-grow-1"
         style={{
           minHeight: "100vh",
-          backgroundColor: "#f8f9fa",
+          backgroundColor: "#f8fafc",
+          marginLeft: "260px",
         }}
       >
         <CustomerNavbar />
@@ -19,9 +19,7 @@ function CustomerLayout({ children }) {
         <main className="p-4">
           {children}
         </main>
-
       </div>
-
     </div>
   );
 }
